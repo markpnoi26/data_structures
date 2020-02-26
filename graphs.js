@@ -36,13 +36,10 @@ newGraph.addVertex("Aspen")
 
 newGraph.addEdge('Tokyo', 'Dallas')
 newGraph.addEdge('Dallas', 'Aspen')
-
 console.log(newGraph.adjacencyList)
 
 newGraph.removeEdge('Tokyo', 'Dallas')
-
 console.log(newGraph.adjacencyList)
 
 newGraph.removeVertex('Aspen')
-
 console.log(newGraph.adjacencyList)
