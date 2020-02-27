@@ -65,8 +65,8 @@ class HashTable {
 let ht = new HashTable()
 ht.set("red", "99123")
 ht.set("blue", "00123")
-ht.set("reyo", "66723")
-ht.set("reyo2", "66723")
+ht.set("purple", "66723")
+ht.set("violet", "66723")
 
 console.log(ht.values())
 console.log(ht.keys())
