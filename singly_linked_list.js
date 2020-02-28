@@ -26,6 +26,7 @@ class LinkedList {
   }
 
   pop() {
+    return undefined if (!this.tail)
     let oldTail = this.tail
     let currentCount = 1
     let currentNode = this.head
@@ -39,6 +40,25 @@ class LinkedList {
     this.length = this.length - 1
 
     return oldTail
+  }
+
+  shift() {
+    return undefined if (!this.head)
+    let oldHead = this.head
+    let newHead = oldHead.next
+    this.head = newHead
+    oldHead.next = null
+    let currentCount -= 1
+    return oldHead
+  }
+
+  unshift(val) {
+    return this.push(val) if (!this.head)
+    let oldHead = this.head
+    this.head = new Node(val)
+    this.head.next = oldHead
+    this.length += 1
+    return this
   }
 }
 
