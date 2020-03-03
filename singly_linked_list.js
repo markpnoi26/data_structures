@@ -43,7 +43,7 @@ class LinkedList {
   }
 
   shift() {
-    return undefined if (!this.head)
+    if (!this.head) return undefined
     let oldHead = this.head
     let newHead = oldHead.next
     this.head = newHead
@@ -53,12 +53,39 @@ class LinkedList {
   }
 
   unshift(val) {
-    return this.push(val) if (!this.head)
+    if (!this.head) return this.push(val)
     let oldHead = this.head
     this.head = new Node(val)
     this.head.next = oldHead
     this.length += 1
     return this
+  }
+
+  get(index) {
+    if (this.length === 0 || index < 0) return null
+    let count = 0
+    let current = this.head
+    while (count !== index) {
+      if (current.next === undefined) return null
+      current = current.next
+      count ++
+    }
+    return current
+  }
+
+  set(index, val) {
+    if (index < 0 || index > this.length) return false
+    let currentNode = this.get(index)
+    currentNode.val = val
+    return true
+  }
+
+  remove(index) {
+    if (index < 0 || index > this.length) return null
+    let currentNode = get(index)
+    let beforeNode = get(index - 1)
+    beforeNode.next = currentNode.next
+    this.length--
   }
 }
 
