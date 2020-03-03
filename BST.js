@@ -20,7 +20,6 @@ class BinarySearchTree {
 
     let currentNode = this.root
     while (true) {
-      console.log(currentNode)
       if (currentNode.value < newNode.value) {
         console.log('pushing to right...')
         if (currentNode.right === null) {
@@ -37,10 +36,32 @@ class BinarySearchTree {
         } else {
           currentNode = currentNode.left
         }
+      } else {
+        return undefined
       }
     }
     return this
   }
+
+  find(value, node=this.root) {
+    if (!node) return false
+    if (value === node.value) {
+      console.log("I found it...")
+      console.log(node)
+      return true
+    }
+
+    if (value > node.value) {
+      console.log("finding right...")
+      if (node.right === null) return false
+      this.find(value, node.right)
+    } else if (value < node.value) {
+      console.log("finding left...")
+      if (node.left === null) return false
+      this.find(value, node.left)
+    }
+  }
+
 }
 
 let newBST = new BinarySearchTree()
@@ -48,8 +69,9 @@ newBST.insert(10)
 newBST.insert(9)
 newBST.insert(19)
 newBST.insert(21)
+newBST.insert(22)
 
-console.log(newBST.insert(22))
+console.log(newBST.find(22))
 
 
-console.log(newBST)
+// console.log(newBST)
