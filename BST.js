@@ -62,6 +62,28 @@ class BinarySearchTree {
     }
   }
 
+  bfs(value) {
+    const queue = []
+    const visited = []
+    if (!this.root) return false
+    queue.push(this.root)
+
+    while (queue.length) {
+      if (queue[0].value === value) {
+        console.log('found it...')
+        return queue[0]
+      }
+      if (queue[0].left) queue.push(queue[0].left)
+      if (queue[0].right) queue.push(queue[0].right)
+      let shiftedNode = queue.shift()
+      visited.push(shiftedNode)
+    }
+
+    return false
+  }
+
+
+
 }
 
 let newBST = new BinarySearchTree()
@@ -71,7 +93,7 @@ newBST.insert(19)
 newBST.insert(21)
 newBST.insert(22)
 
-console.log(newBST.find(22))
+console.log(newBST.bfs(22))
 
 
 // console.log(newBST)
