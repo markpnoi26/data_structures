@@ -82,6 +82,14 @@ class BinarySearchTree {
     return false
   }
 
+  dfsPreOrder(node = this.root) {
+    let values = []
+    let currentNode = node
+    if (!currentNode.left) {
+      values.push(currentNode.push)
+
+    }
+  }
 
 
 }
