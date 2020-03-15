@@ -18,10 +18,23 @@ function merge(a1, a2) {
       break
     }
   }
-  console.log(arr)
+  return arr
 }
+
+
+function mergeSort(arr) {
+  if (arr.length <= 1) return arr
+  let mid = Math.floor(arr.length/2)
+  let right = mergeSort(arr.slice(mid))
+  let left = mergeSort(arr.slice(0, mid))
+  return merge(right, left)
+}
+
 
 let sampleArray1 = [2,6,7,12]
 let sampleArray2 = [1,3,4,9,90,100]
 
 merge(sampleArray1, sampleArray2)
+let arr3 = mergeSort([1,10, 33, 78, 4, 2, 19, 200, 22])
+console.log(arr3)
+// console.log(arr)
