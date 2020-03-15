@@ -21,9 +21,7 @@ function merge(a1, a2) {
   console.log(arr)
 }
 
-
 let sampleArray1 = [2,6,7,12]
 let sampleArray2 = [1,3,4,9,90,100]
 
 merge(sampleArray1, sampleArray2)
-// console.log(arr)
