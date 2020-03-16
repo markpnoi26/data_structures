@@ -1,4 +1,6 @@
 function pivot(arr) {
+  // TODO, implement selected pivot point and bring to the beginning of array.
+  // pivot point starts at beginning
   let p = 0
   let moreIdx = 1
   let lessIdx = 0
@@ -21,3 +23,4 @@ function pivot(arr) {
 
 
 console.log(pivot([38, 5, 47, 15, 36, 26, 27, 44, 46, 4, 19, 50, 48]))
+//                [19, 5, 15, 36, 26, 27, 4, 38, 46, 47, 44, 50, 48]
