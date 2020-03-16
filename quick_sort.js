@@ -1,11 +1,11 @@
-function pivot(arr) {
+function pivot(arr, start=0, end=arr.length) {
   // TODO, implement selected pivot point and bring to the beginning of array.
   // pivot point starts at beginning
-  let p = 0
-  let moreIdx = 1
-  let lessIdx = 0
+  let p = start
+  let moreIdx = p+1
+  let lessIdx = start
 
-  for (let i = 1; i < arr.length; i++) {
+  for (let i = 1; i < end; i++) {
     if (arr[p] > arr[i]) {
       let temp = arr[i]
       arr[i] = arr[moreIdx]
