@@ -26,7 +26,7 @@ class LinkedList {
   }
 
   pop() {
-    return undefined if (!this.tail)
+    if (!this.tail) return undefined 
     let oldTail = this.tail
     let currentCount = 1
     let currentNode = this.head
@@ -48,7 +48,6 @@ class LinkedList {
     let newHead = oldHead.next
     this.head = newHead
     oldHead.next = null
-    let currentCount -= 1
     return oldHead
   }
 
