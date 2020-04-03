@@ -1,2 +1,2 @@
 # data_structures
-This is my Data structures practice.
+This is my Data structures collections.
