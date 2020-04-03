@@ -6,7 +6,14 @@ class Queue {
     }
 
     shift() {
+        if (this.first === null) {
+            this.last = null
+            return null
+        }
         const shiftedItem = this.first
+        if (shiftedItem === this.last) {
+            this.last = null
+        }
         this.first = this.first.next
         shiftedItem.next = null
         this.size--
@@ -24,6 +31,7 @@ class Queue {
             this.last = newNode
             this.size++
         }
+        return this.size
     }
 
     print() {
@@ -55,4 +63,9 @@ myQ.print()
 console.log(myQ.size)
 console.log('shifted:', myQ.shift())
 myQ.print()
+myQ.shift()
+myQ.shift()
+myQ.shift()
+myQ.shift()
+myQ.shift()
 console.log(myQ.size)
