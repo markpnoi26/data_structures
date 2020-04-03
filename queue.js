@@ -16,7 +16,7 @@ class Queue {
         }
         this.first = this.first.next
         shiftedItem.next = null
-        this.size--
+        if (this.size > 0) this.size--
         return shiftedItem
     }
 
