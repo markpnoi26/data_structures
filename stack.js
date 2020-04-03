@@ -11,7 +11,6 @@ class Stack {
         } 
         let poppedNode = this.first
         this.first = this.first.next
-
         poppedNode.next = null
         this.size--
         return poppedNode
@@ -25,7 +24,13 @@ class Stack {
     }
 
     print() {
-
+        let currNode = this.first
+        const arr = []
+        while (currNode !== null) {
+            arr.push(currNode.val)
+            currNode = currNode.next
+        }
+        console.log(arr)
     }
 }
 
@@ -36,3 +41,20 @@ class Node {
         this.next = null
     }
 }
+
+
+let newStack = new Stack()
+
+
+newStack.push(5)
+newStack.push(10)
+newStack.push(11)
+newStack.push(12)
+newStack.push(50)
+newStack.push(3)
+newStack.push(1)
+newStack.push(0)
+newStack.print()
+console.log(newStack.pop())
+console.log(newStack.pop())
+newStack.print()
