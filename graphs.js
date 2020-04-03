@@ -66,6 +66,26 @@ class Graph {
     return order
   }
 
+  bfTrav(vert) {
+    const order = []
+    const queue = []
+    const queued = {}
+    queue.push(vert)
+    queued[vert] = true
+    while (queue.length > 0) {
+      const frontVert = queue[0]
+      for (let adj of this.adjacencyList[frontVert]) {
+        if (!queued[adj]) {
+          queue.push(adj)
+          queued[adj] = true
+        }
+      }
+
+      order.push(queue.shift())
+    }
+    return order
+  }
+
 
 }
 
@@ -104,6 +124,7 @@ dfsGraph.addEdge("D", "F")
 dfsGraph.addEdge("E", "F")
 dfsGraph.addEdge("F", "G")
 console.log(dfsGraph.adjacencyList)
-console.log(dfsGraph.dfTrav("A"))
+console.log("DF Traversal Recursion:", dfsGraph.dfTrav("A"))
 // console.log(dfsGraph.dfTrav("B"))
-console.log(dfsGraph.dfTravIterate("A"))
+console.log("DF Traversal Iteration:", dfsGraph.dfTravIterate("A"))
+console.log("BF Traversal Iteration:", dfsGraph.bfTrav("A"))
