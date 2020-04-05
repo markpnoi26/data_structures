@@ -57,6 +57,7 @@ class WeigthedGraph {
             }
 
             // if target node isnt reached yet, check if deQ is defined (will return undefined if priority Queue is empty)
+            // still not sure about (distances[deQ.val] !== Infinity) logic.
             if (deQ || distances[deQ.val] !== Infinty) {
                 // loop through all adjacency list for deQ.val
                 // this.adjacencyList["A"] = [{node..}, {node..}]
