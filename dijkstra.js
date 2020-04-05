@@ -20,13 +20,11 @@ class WeigthedGraph {
 
     // dijkstra's algorithm
     shortestPath(start, target) {
-        const visited = {}
+        const shortestPath = []
         const distances = {}
         const previousNode = {}
         const priorityQ = new PriorityQueue()
         let deQ;
-
-        console.log(this.adjacencyList)
 
         for (let key in this.adjacencyList) {
             if (start === key) {
@@ -34,7 +32,6 @@ class WeigthedGraph {
                 priorityQ.enQ(key, 0)
             } else {
                 distances[key] = Infinity
-                priorityQ.enQ(key, Infinity)
             }
 
             previousNode[key] = null
@@ -42,29 +39,54 @@ class WeigthedGraph {
 
         
         while (priorityQ.values.length > 0) {
+            // deQueued from priority Queue
             deQ = priorityQ.deQ()
+            // check first if target is reached, if it is
+            // return the path it took to get there
             if (deQ.val === target) {
-                // do something
-                // break the loop
-                return visited
+                // return distance
+                let currNode = target
+                while (currNode !== start) {
+                    shortestPath.push(currNode)
+                    currNode = previousNode[currNode]
+                    if (currNode === start) {
+                        shortestPath.push(currNode)
+                    }
+                }
+                return shortestPath.reverse()
             }
 
-            if (deQ || distances[deQ] !== Infinty) {
-                for (let vertex of this.adjacencyList[deQ.val]) {
-                    let nextNode = this.adjacencyList[deQ.val][vertex]
-                    console.log(nextNode)
+            // if target node isnt reached yet, check if deQ is defined (will return undefined if priority Queue is empty)
+            if (deQ || distances[deQ.val] !== Infinty) {
+                // loop through all adjacency list for deQ.val
+                // this.adjacencyList["A"] = [{node..}, {node..}]
+                for (let el of this.adjacencyList[deQ.val]) {
+                    let newWt = el.weight+deQ.priority
+                    // (calculate the new possible wt of the next node, by adding the priority(wt) to the node weight)
+                    if (newWt < distances[el.node]) {
+                        // if the new potential wt is less than distances recorded, update and add that new node to by enqueue
+                        // this ensures that the shortest path from that node is enqueued first.
+                        distances[el.node] = newWt
+                        // update the previous node if it is lesser
+                        previousNode[el.node] = deQ.val
+                        priorityQ.enQ(el.node, newWt)
+                    }
                 }
             }
-
         }
 
-        console.log(distances)
-        console.log(priorityQ)
-        console.log(previousNode)
+        return ("No short path to target")
+        // console.log(priorityQ)
+        // console.log(previousNode)
+        // console.log(distances)
+        // console.log(shortestPath)
+        // return shortestPath
     }
 
 }
 
+// not an optimized PriorityQueue, this class works on 
+// O(n*log(n))
 class PriorityQueue {
 
     constructor() {
@@ -105,4 +127,6 @@ djGraph.addEdge("D", "F", 1)
 djGraph.addEdge("E", "F", 1)
 djGraph.addEdge("F", "G", 5)
 
-djGraph.shortestPath("A", "G")
+console.log(djGraph.shortestPath("A", "E"))
+console.log(djGraph.shortestPath("G", "A"))
+console.log(djGraph.shortestPath("B", "A"))
