@@ -86,7 +86,7 @@ class WeigthedGraph {
 }
 
 // not an optimized PriorityQueue, this class works on 
-// O(n*log(n))
+// O(n*log(n)), optimized version of this is actually O(log(n))
 class PriorityQueue {
 
     constructor() {
