@@ -1,78 +1,71 @@
 class PriorityQueue {
-  constructor() {
-    this.values = []
+  // priority based on max value. 
+  // if min priority is desired, update the <>= signs as noted
+  constructor(){
+      this.values = [];
   }
-
-  enqueue(value, priority) {
-    let newNode = new Node(value, priority)
-    this.values.push(newNode)
-    this.bubbleUp()
+  enqueue(val, priority){
+      let newNode = new Node(val, priority);
+      this.values.push(newNode);
+      this.bubbleUp();
   }
-
-  // the priority is low it goes higher
-  // the priority is high it sinks down
-
-  bubbleUp() {
-    let index = this.values.length - 1
-    const node = this.values[index]
-    while (index > 0 && this.values[index].priority <= this.values[Math.floor((index -1)/2)].priority) {
-      let parentIndex = Math.floor((index -1)/2)
-      let parent = this.values[parentIndex]
-      if (node.priority < parent.priority) {
-        this.values[parentIndex] = node
-        this.values[index] = parent
-        index = parentIndex
+  bubbleUp(){
+      let idx = this.values.length - 1;
+      const element = this.values[idx];
+      while(idx > 0){
+          let parentIdx = Math.floor((idx - 1)/2);
+          let parent = this.values[parentIdx];
+          if(element.priority <= parent.priority) break;
+          this.values[parentIdx] = element;
+          this.values[idx] = parent;
+          idx = parentIdx;
       }
-    }
   }
-
-  dequeue() {
-    if (this.values.length > 1) {
-      let poppedValue = this.values.pop()
-      this.values[0] = poppedValue
-      this.bubbleDown(0)
-    } else {
-      this.values.pop()
-    }
-  }
-
-  bubbleDown(index) {
-    let currentIndex = index
-    const element = this.values[currentIndex]
-    while (
-      currentIndex !== this.values.length - 1 &&
-      (
-        element.priority > this.values[2*currentIndex + 1].priority ||
-        element.priority > this.values[2*currentIndex + 2].priority
-      )) {
-      let minChild, minChildIdx
-      let leftChildIdx = (2*currentIndex + 1);
-      let rightChildIdx = (2*currentIndex + 2);
-      let leftChild = this.values[leftChildIdx];
-      let rightChild = this.values[rightChildIdx];
-
-      if (leftChild < rightChild || rightChild === undefined) {
-        minChild = leftChild
-        minChildIdx = leftChildIdx
-      } else {
-        minChild = rightChild
-        minChildIdx = rightChildIdx
+  dequeue(){
+      const min = this.values[0];
+      const end = this.values.pop();
+      if(this.values.length > 0){
+          this.values[0] = end;
+          this.sinkDown();
       }
-
-      if (element <= maxChild) break;
-      this.values[currentIndex] = maxChild
-      this.values[maxChildIdx] = element
-      currentIndex = maxChildIdx
-    }
+      return min;
   }
+  sinkDown(){
+      let idx = 0;
+      const length = this.values.length;
+      const element = this.values[0];
+      while(true){
+          let leftChildIdx = 2 * idx + 1;
+          let rightChildIdx = 2 * idx + 2;
+          let leftChild,rightChild;
+          let swap = null;
 
-
-
+          if(leftChildIdx < length){
+              leftChild = this.values[leftChildIdx];
+              if(leftChild.priority > element.priority) {
+                  swap = leftChildIdx;
+              }
+          }
+          if(rightChildIdx < length){
+              rightChild = this.values[rightChildIdx];
+              if(
+                  (swap === null && rightChild.priority > element.priority) || 
+                  (swap !== null && rightChild.priority > leftChild.priority)
+              ) {
+                 swap = rightChildIdx;
+              }
+          }
+          if(swap === null) break;
+          this.values[idx] = this.values[swap];
+          this.values[swap] = element;
+          idx = swap;
+      }
+  }
 }
 
 class Node {
-  constructor(value, priority) {
-    this.value = value
-    this.priority = priority
+  constructor(val, priority){
+      this.val = val;
+      this.priority = priority;
   }
 }
