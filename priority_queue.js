@@ -1,6 +1,6 @@
 class PriorityQueue {
   // priority based on max value. 
-  // if min priority is desired, update the <>= signs as noted
+  // if min priority is desired, update the (<) for maxPriority (>) for minPriority => signs as noted
   constructor(){
       this.values = [];
   }
@@ -15,7 +15,7 @@ class PriorityQueue {
       while(idx > 0){
           let parentIdx = Math.floor((idx - 1)/2);
           let parent = this.values[parentIdx];
-          // here
+          // here (>=) for min priority
           if(element.priority <= parent.priority) break;
           this.values[parentIdx] = element;
           this.values[idx] = parent;
@@ -43,14 +43,14 @@ class PriorityQueue {
 
           if(leftChildIdx < length){
               leftChild = this.values[leftChildIdx];
-              // here
+              // here (<) for min priority
               if(leftChild.priority > element.priority) {
                   swap = leftChildIdx;
               }
           }
           if(rightChildIdx < length){
               rightChild = this.values[rightChildIdx];
-              // here
+              // here (<) for min priority *on both conditionals
               if(
                   (swap === null && rightChild.priority > element.priority) || 
                   (swap !== null && rightChild.priority > leftChild.priority)
